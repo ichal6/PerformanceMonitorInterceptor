@@ -26,4 +26,19 @@ public class AopConfiguration {
         pointcut.setExpression("pl.lechowicz.performance_trace.AopConfiguration.monitor()");
         return new DefaultPointcutAdvisor(pointcut, performanceMonitorInterceptor());
     }
+
+    // custom performance monitoring intercepter
+    @Pointcut("execution(public int pl.lechowicz.performance_trace.EmployeeService.createEmployee(..))")
+    public void customMonitor() { }
+
+    @Bean
+    public CustomPerformanceInterceptor customPerformanceMonitorInterceptor() {
+        return new CustomPerformanceInterceptor(true);
+    }
+    @Bean
+    public Advisor customPerformanceMonitorAdvisor() {
+        AspectJExpressionPointcut pointcut = new AspectJExpressionPointcut();
+        pointcut.setExpression("pl.lechowicz.performance_trace.AopConfiguration.customMonitor()");
+        return new DefaultPointcutAdvisor(pointcut, customPerformanceMonitorInterceptor());
+    }
 }

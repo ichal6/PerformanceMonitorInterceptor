@@ -9,8 +9,8 @@ import java.util.concurrent.atomic.AtomicInteger;
 @Service
 public class EmployeeService {
 
-    private Map<Integer, Employee> employeeMap = new HashMap<>();
-    private AtomicInteger lastEmpId = new AtomicInteger(0);
+    private final Map<Integer, Employee> employeeMap = new HashMap<>();
+    private final AtomicInteger lastEmpId = new AtomicInteger(0);
 
     public String getFullName(Integer employeeId) throws InterruptedException{
         //Adding 300ms sleep to see impact on execution
