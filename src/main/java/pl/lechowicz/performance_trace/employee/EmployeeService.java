@@ -1,4 +1,4 @@
-package pl.lechowicz.performance_trace;
+package pl.lechowicz.performance_trace.employee;
 
 import org.springframework.stereotype.Service;
 

@@ -1,4 +1,4 @@
-package pl.lechowicz.performance_trace;
+package pl.lechowicz.performance_trace.monitor;
 
 import org.aspectj.lang.annotation.Pointcut;
 import org.springframework.aop.Advisor;
@@ -12,7 +12,7 @@ import org.springframework.context.annotation.EnableAspectJAutoProxy;
 @Configuration
 @EnableAspectJAutoProxy
 public class AopConfiguration {
-    @Pointcut("execution(public String pl.lechowicz.performance_trace.EmployeeService.getFullName(..)))")
+    @Pointcut("execution(public String pl.lechowicz.performance_trace.employee.EmployeeService.getFullName(..)))")
     public void monitor() { }
 
     @Bean
@@ -23,12 +23,12 @@ public class AopConfiguration {
     @Bean
     public Advisor performanceMonitorAdvisor() {
         AspectJExpressionPointcut pointcut = new AspectJExpressionPointcut();
-        pointcut.setExpression("pl.lechowicz.performance_trace.AopConfiguration.monitor()");
+        pointcut.setExpression("pl.lechowicz.performance_trace.monitor.AopConfiguration.monitor()");
         return new DefaultPointcutAdvisor(pointcut, performanceMonitorInterceptor());
     }
 
     // custom performance monitoring intercepter
-    @Pointcut("execution(public int pl.lechowicz.performance_trace.EmployeeService.createEmployee(..))")
+    @Pointcut("execution(public int pl.lechowicz.performance_trace.employee.EmployeeService.createEmployee(..))")
     public void customMonitor() { }
 
     @Bean
@@ -38,7 +38,7 @@ public class AopConfiguration {
     @Bean
     public Advisor customPerformanceMonitorAdvisor() {
         AspectJExpressionPointcut pointcut = new AspectJExpressionPointcut();
-        pointcut.setExpression("pl.lechowicz.performance_trace.AopConfiguration.customMonitor()");
+        pointcut.setExpression("pl.lechowicz.performance_trace.monitor.AopConfiguration.customMonitor()");
         return new DefaultPointcutAdvisor(pointcut, customPerformanceMonitorInterceptor());
     }
 }

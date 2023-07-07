@@ -1,4 +1,4 @@
-package pl.lechowicz.performance_trace;
+package pl.lechowicz.performance_trace.monitor;
 
 import org.aopalliance.intercept.MethodInvocation;
 import org.apache.commons.logging.Log;
