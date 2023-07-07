@@ -12,9 +12,9 @@ public class EmployeeService {
     private final Map<Integer, Employee> employeeMap = new HashMap<>();
     private final AtomicInteger lastEmpId = new AtomicInteger(0);
 
-    public String getFullName(Integer employeeId) throws InterruptedException{
-        //Adding 300ms sleep to see impact on execution
-        Thread.sleep(300);
+    public String getFullName(Integer employeeId, int delay) throws InterruptedException{
+        //Adding sleep to see impact on execution
+        Thread.sleep(delay);
         Employee employee = employeeMap.get(employeeId);
         if(employee != null) {
             return employee.firstName() + " " + employee.lastName();
@@ -23,9 +23,9 @@ public class EmployeeService {
     }
 
 
-    public int createEmployee(Employee employee) throws InterruptedException{
-        //Adding 500ms delay
-        Thread.sleep(500);
+    public int createEmployee(Employee employee, int delay) throws InterruptedException{
+        //Adding delay
+        Thread.sleep(delay);
         employeeMap.put(lastEmpId.addAndGet(1), employee);
         return lastEmpId.get();
     }

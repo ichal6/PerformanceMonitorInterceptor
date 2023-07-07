@@ -11,12 +11,16 @@ public class EmployeeController {
     }
 
     @PostMapping("/employee")
-    public int addEmployee(@RequestBody Employee employee) throws InterruptedException {
-        return this.employeeService.createEmployee(employee);
+    public int addEmployee(@RequestBody Employee employee,
+                           @RequestParam(name = "d", required = false, defaultValue = "500") int delay)
+            throws InterruptedException {
+        return this.employeeService.createEmployee(employee, delay);
     }
 
     @GetMapping("/fullname")
-    public String getFullName(@RequestParam Integer id) throws InterruptedException {
-        return this.employeeService.getFullName(id);
+    public String getFullName(@RequestParam Integer id,
+                              @RequestParam(name = "d", required = false, defaultValue = "300") int delay)
+            throws InterruptedException {
+        return this.employeeService.getFullName(id, delay);
     }
 }
